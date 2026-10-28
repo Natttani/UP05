@@ -103,4 +103,25 @@ final class Application
             ':id'     => $id,
         ]);
     }
+
+    public static function changeStatus(int $id, int $newStatusId, ?string $cancelReason = null): bool
+        {
+            $app = self::find($id);
+            if (!$app) {
+                return false;
+            }
+            $current = (int) $app['status_id'];
+            if ($current === $newStatusId) {
+                return true; 
+            }
+            if (!Status::canTransition($current, $newStatusId)) {
+                return false;
+            }
+            if ($newStatusId === Status::CANCELLED && trim((string) $cancelReason) === '') {
+                return false; 
+            }
+            self::setStatus($id, $newStatusId, $newStatusId === Status::CANCELLED ? trim((string) $cancelReason) : null);
+            return true;
+        }
+
 }

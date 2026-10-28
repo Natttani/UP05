@@ -12,7 +12,6 @@ $errors = $_SESSION['errors'] ?? [];
 $old    = $_SESSION['old'] ?? [];
 unset($_SESSION['errors'], $_SESSION['old']);
 
-// телефон по умолчанию — из профиля (это ещё и требование М3 п.3, сделаем сразу)
 $defaultPhone = $old['phone'] ?? $user['phone'] ?? '';
 
 $pageTitle = 'Новая заявка';
