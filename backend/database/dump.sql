@@ -5,7 +5,7 @@ CREATE TABLE users (
     full_name TEXT NOT NULL,
     phone TEXT NOT NULL,
     email TEXT NOT NULL,
-    role TEXT DEFAULT 'user',
+    role TEXT NOT NULL DEFAULT 'user',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -54,21 +54,31 @@ CREATE TABLE reviews (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-INSERT INTO services (name) VALUES 
-('Общий клининг'), 
-('Генеральная уборка'), 
-('Послестроительная уборка'), 
-('Химчистка ковров и мебели');
 
-INSERT INTO payment_methods (name) VALUES 
-('Наличными'), 
-('Банковской картой');
+INSERT INTO statuses (id, name) VALUES
+    (1, 'Новая'),
+    (2, 'В работе'),
+    (3, 'Выполнено'),
+    (4, 'Отменено');
 
-INSERT INTO statuses (name) VALUES 
-('Новая'), 
-('В работе'), 
-('Выполнено'), 
-('Отменено');
 
-INSERT INTO users (login, password, full_name, phone, email, role) VALUES 
-('Admin', '$2y$10$e.wXq.fD5Y.T.w2O5Y5O5uW5O5Y5O5Y5O5Y5O5Y5O5Y5O5Y5O5Y5', 'Администратор', '8(999)999-99-99', 'admin@blesk.ru', 'admin');
+INSERT INTO services (id, name) VALUES
+    (1, 'Общий клининг'),
+    (2, 'Генеральная уборка'),
+    (3, 'Послестроительная уборка'),
+    (4, 'Химчистка ковров и мебели'),
+    (5, 'Иная услуга');
+
+INSERT INTO payment_methods (id, name) VALUES
+    (1, 'Наличными'),
+    (2, 'Банковской картой');
+
+-- Пароль: Chisto2026 (bcrypt cost 12, проверен password_verify).
+INSERT INTO users (login, password, full_name, phone, email, role) VALUES (
+    'Admin',
+    '$2y$12$/6Jbj4bAeZ.8SKHGDsQBuuDPqoN/YUCr89FSgF7XnMnaDCfJAkyAG',
+    'Администратор',
+    '8(999)999-99-99',
+    'admin@blesk.ru',
+    'admin'
+);
