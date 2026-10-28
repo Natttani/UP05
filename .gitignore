@@ -1,15 +1,11 @@
-# Рабочая SQLite-база — создаётся из dump.sql при первом запуске
 backend/database/*.sqlite
 backend/database/*.db
 
-# IDE
 .idea/
 .vscode/
 *.iml
 
-# ОС
 .DS_Store
 Thumbs.db
 
-# Логи
 *.log
