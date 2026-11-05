@@ -18,7 +18,7 @@ require __DIR__ . '/partials/header.php';
 <?php else: ?>
     <div class="cards">
         <?php foreach ($apps as $a): ?>
-            <article class="card">
+            <article class="card card-enter">
                 <header class="card-head">
                     <strong><?= e($a['service_name']) ?></strong>
                     <span class="badge badge-status-<?= (int) $a['status_id'] ?>">

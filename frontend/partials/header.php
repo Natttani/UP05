@@ -33,8 +33,10 @@ $flash = flash_get();
 </header>
 
 <?php if ($flash): ?>
-    <div class="flash flash-<?= e($flash['type']) ?>" role="status">
-        <?= e($flash['message']) ?>
+    <div class="toast-container" id="toast-container">
+        <div class="toast toast-<?= e($flash['type']) ?>" role="status">
+            <?= e($flash['message']) ?>
+        </div>
     </div>
 <?php endif; ?>
 
