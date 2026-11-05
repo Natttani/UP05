@@ -24,8 +24,11 @@ $v->required('address')
   ->required('phone')->phone('phone')
   ->required('date')->dateDmy('date')
   ->required('time')->timeHm('time')
-  ->required('service_id')
   ->required('payment_id');
+
+if (!$data['other_service']) {
+    $v->required('service_id');
+}
 
 
 $pdo = Database::pdo();
@@ -37,13 +40,14 @@ if (!$serviceOk->fetchColumn()) {
 
 $errors = $v->errors();
 
-if (empty($errors['service_id'])) {
+if (!$data['other_service'] && empty($errors['service_id'])) {
     $chk = $pdo->prepare('SELECT 1 FROM services WHERE id = :id');
     $chk->execute([':id' => (int) $data['service_id']]);
     if (!$chk->fetchColumn()) {
         $errors['service_id'] = 'Выберите услугу из списка';
     }
 }
+
 if (empty($errors['payment_id'])) {
     $chk = $pdo->prepare('SELECT 1 FROM payment_methods WHERE id = :id');
     $chk->execute([':id' => (int) $data['payment_id']]);

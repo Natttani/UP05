@@ -368,7 +368,6 @@ p  { margin: 0 0 .75rem; }
 
 .cta { display: flex; gap: .5rem; justify-content: center; margin: 1rem 0; flex-wrap: wrap; }
 
-/* ===== М3: выезжающие уведомления (тосты) ===== */
 .toast-container {
     position: fixed;
     top: .75rem;
@@ -400,7 +399,6 @@ p  { margin: 0 0 .75rem; }
 @keyframes toastIn  { to { transform: translateY(0);     opacity: 1; } }
 @keyframes toastOut { to { transform: translateY(-120%); opacity: 0; } }
 
-/* ===== М3: плавное появление карточек ===== */
 @keyframes cardEnter {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -410,14 +408,12 @@ p  { margin: 0 0 .75rem; }
 .card-enter:nth-child(3) { animation-delay: .1s; }
 .card-enter:nth-child(4) { animation-delay: .15s; }
 
-/* ===== М3: анимация смены статуса в админке ===== */
 @keyframes statusPulse {
     0%   { box-shadow: 0 0 0 0 rgba(11,114,133,.5); }
     100% { box-shadow: 0 0 0 10px rgba(11,114,133,0); }
 }
 .badge.pulse { animation: statusPulse .8s ease-out; }
 
-/* ===== М3: микроанимация поля с ошибкой ===== */
 @keyframes fieldShake {
     0%,100% { transform: translateX(0); }
     25%     { transform: translateX(-3px); }

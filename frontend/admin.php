@@ -43,7 +43,6 @@ require __DIR__ . '/partials/header.php';
                     <?= e($s['name']) ?>
                 </option>
             <?php endforeach; ?>
-            <option value="<?= SERVICE_OTHER_ID ?>" <?= $serviceFilter === SERVICE_OTHER_ID ? 'selected' : '' ?>>Иная услуга</option>
         </select>
     </label>
     <button class="btn" type="submit">Фильтр</button>

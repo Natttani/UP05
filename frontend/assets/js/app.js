@@ -37,7 +37,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const cb = document.getElementById('other_service');
     const wrap = document.getElementById('other_service_wrap');
     if (cb && wrap) {
-        const toggle = () => { wrap.hidden = !cb.checked; };
+        const serviceSelect = document.getElementById('service_id');
+        const customDesc = document.getElementById('custom_service_desc');
+
+        const toggle = () => {
+            wrap.hidden = !cb.checked;
+            if (serviceSelect) {
+                serviceSelect.required = !cb.checked;
+                if (cb.checked) serviceSelect.value = ''; 
+            }
+            if (customDesc) {
+                customDesc.required = cb.checked;
+            }
+        };
         cb.addEventListener('change', toggle);
         toggle();
     }
