@@ -46,7 +46,7 @@ require __DIR__ . '/partials/header.php';
         <input type="text" id="phone" name="phone"
                value="<?= e($old['phone'] ?? '') ?>"
                placeholder="8(999)123-45-67"
-               pattern="8\(\d{3}\)\d{3}-\d{2}-\d{2}" required>
+               pattern="8\(\d{3}\)\d{3}-\d{2}-\d{2}" required data-phone>
         <?php if (isset($errors['phone'])): ?><div class="error"><?= e($errors['phone']) ?></div><?php endif; ?>
     </div>
 
