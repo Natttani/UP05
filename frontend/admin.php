@@ -15,8 +15,8 @@ if ($page > $pages) { $page = $pages; }
 $offset  = ($page - 1) * $perPage;
 
 $apps     = Application::all($statusFilter, $serviceFilter, $perPage, $offset);
-$statuses = Database::pdo()->query('SELECT id, name FROM statuses ORDER BY id')->fetchAll();
-$services = Database::pdo()->query('SELECT id, name FROM services WHERE id <> ' . SERVICE_OTHER_ID . ' ORDER BY id')->fetchAll();
+$statuses = Status::allRows();
+$services = Service::all();
 
 $pageTitle = 'Админ-панель';
 require __DIR__ . '/partials/header.php';

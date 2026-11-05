@@ -19,4 +19,9 @@ final class Status
     {
         return in_array($to, self::TRANSITIONS[$from] ?? [], true);
     }
+
+     public static function allRows(): array
+    {
+        return Database::pdo()->query('SELECT id, name FROM statuses ORDER BY id')->fetchAll();
+    }
 }

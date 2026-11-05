@@ -124,5 +124,38 @@ final class Application
             return true;
         }
 
+        public static function forUserFiltered(int $userId, string $group = 'all'): array
+    {
+        $sql = 'SELECT a.*,
+                       s.name  AS service_name,
+                       st.name AS status_name,
+                       pm.name AS payment_name,
+                       r.id    AS review_id,
+                       r.text  AS review_text,
+                       r.rating AS review_rating
+                FROM applications a
+                JOIN services s         ON s.id  = a.service_id
+                JOIN statuses st        ON st.id = a.status_id
+                JOIN payment_methods pm ON pm.id = a.payment_id
+                LEFT JOIN reviews r     ON r.application_id = a.id
+                WHERE a.user_id = :uid';
+        $params = [':uid' => $userId];
+
+        if ($group === 'active') {
+            $sql .= ' AND a.status_id IN (:s1, :s2)';
+            $params[':s1'] = Status::NEW;
+            $params[':s2'] = Status::IN_WORK;
+        } elseif ($group === 'done') {
+            $sql .= ' AND a.status_id IN (:s1, :s2)';
+            $params[':s1'] = Status::DONE;
+            $params[':s2'] = Status::CANCELLED;
+        }
+
+        $sql .= ' ORDER BY a.created_at DESC, a.id DESC';
+        $stmt = Database::pdo()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
 
 }

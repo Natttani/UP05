@@ -4,8 +4,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/../backend/bootstrap.php';
 Auth::requireUser();
 
-$services = Database::pdo()->query('SELECT id, name FROM services WHERE id <> ' . SERVICE_OTHER_ID . ' ORDER BY id')->fetchAll();
-$payments = Database::pdo()->query('SELECT id, name FROM payment_methods ORDER BY id')->fetchAll();
+$services = Service::regular();
+$payments = PaymentMethod::all();
 $user     = User::findById(Auth::id());
 
 $errors = $_SESSION['errors'] ?? [];
